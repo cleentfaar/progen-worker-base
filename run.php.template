@@ -1,0 +1,20 @@
+<?php
+//use Vendor\Package\Worker\YourWorker\Command;
+
+/**
+ * The main executable for this worker
+ * First import dependencies and available commands, then run the application
+ */
+define("PROGEN_WORKER_DIR", __DIR__);
+require_once __DIR__ . '/vendor/autoload.php';
+$console = require_once __DIR__ . DIRECTORY_SEPARATOR . 'bootstrapper.php';
+
+/**
+ * Add your commands for this worker
+ */
+//$console->add(new Command\VhostAddCommand());
+
+/**
+ * Run the application
+ */
+$console->run();

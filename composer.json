@@ -1,0 +1,30 @@
+{
+    "name":        "cleentfaar/progen-worker-base",
+    "description": "The base worker files, to be used by depending workers for easy extension",
+    "keywords":    ["progen", "worker", "base", "cli"],
+    "homepage":    "http://github.com/cleentfaar",
+    "license":     "MIT",
+    "autoload": {
+        "psr-0": {
+            "Cleentfaar": "src/"
+        }
+    },
+    "authors":[
+        {
+            "name": "Cas Leentfaar",
+            "email": "info@casleentfaar.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require":{
+        "php": ">=5.3.3",
+        "silex/silex": ">=1.0.0",
+        "igorw/config-service-provider": ">=1.0.0",
+        "knplabs/console-service-provider": "dev-master",
+        "neutron/silex-filesystem-provider": ">=1.0.0",
+        "dflydev/doctrine-orm-service-provider": ">=1.0.0"
+    },
+    "require-dev":{
+        "phpunit/phpunit": "3.7.*"
+    }
+}

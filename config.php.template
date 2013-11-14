@@ -1,0 +1,30 @@
+<?php
+/**
+ * Progen worker configuration
+ * Copy and rename this file to config.php, then make necessary changes
+ */
+return array(
+    'progen' => array(
+        'task_types' => array(
+            'create-website',
+            'create-git-website',
+            'add-vhost',
+            'restart-apache',
+            'add-dns',
+            'restart-dns',
+        ),
+        'vhost_template' => __DIR__ . '/src/ProGen/Worker/Development/Resources/templates/vhost-template.txt',
+        'sites_available_dir' => '/etc/apache2/sites-available',
+        'chown_user_website' => 'www-data',
+        'chown_group_website' => 'staff',
+        'chown_user_git_website' => 'git-user',
+        'chown_group_git_website' => 'staff',
+        'database' => array(
+            'name' => 'progen',
+            'host' => '127.0.0.1', // some cases you may host this worker on another server, then you put the progen host here
+            'port' => '',
+            'username' => 'root',
+            'password' => ''
+        ),
+    ),
+);

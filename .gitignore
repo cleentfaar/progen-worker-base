@@ -1,0 +1,11 @@
+.idea
+.buildpath
+.settings
+.project
+vendor
+phpunit.xml
+composer.phar
+composer.lock
+!cache/.gitkeep
+cache/*
+config.php
