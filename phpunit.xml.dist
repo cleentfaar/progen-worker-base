@@ -13,7 +13,7 @@
     >
     <testsuites>
         <testsuite name="ProGen Worker Test Suite">
-            <directory>./src/Cleentfaar/ProgenBnundle/Worker</directory>
+            <directory>./src/Cleentfaar/ProGen/Worker</directory>
         </testsuite>
     </testsuites>
 </phpunit>

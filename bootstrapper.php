@@ -43,7 +43,7 @@ $app->register(new DoctrineOrmServiceProvider(), array(
             array(
                 "use_simple_annotation_reader" => false,
                 "type" => "annotation",
-                "namespace" => "Cleentfaar\ProGen\Worker\Base\Entity",
+                "namespace" => "Cleentfaar\\ProGen\\Worker\\Base\\Entity",
                 "path" => __DIR__ . "/src/Cleentfaar/ProGen/Worker/Base/Entity",
             ),
         ),
@@ -57,8 +57,8 @@ $console = $app['console'];
  * This is handy for quick entity updates after adjustments to the main (GUI) entities, among other cases
  */
 $helperSet = new HelperSet(array(
-    'db' => new ConnectionHelper($console->getSilexApplication()['orm.em']->getConnection()),
-    'em' => new EntityManagerHelper($console->getSilexApplication()['orm.em'])
+    'db' => new ConnectionHelper($app['orm.em']->getConnection()),
+    'em' => new EntityManagerHelper($app['orm.em'])
 ));
 /**
  * Note: The commands added below are slightly less then those available normally

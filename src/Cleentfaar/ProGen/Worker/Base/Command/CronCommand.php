@@ -200,6 +200,12 @@ class CronCommand extends Command
         /**
          * Indicate to other workers that we have finished the running task
          */
+        /**
+		 * To be replaced with proper orm!
+		 * $task->set...
+		 * $em->flush();
+         */
+        /**
         $sql = "UPDATE `tasks` SET `executed` = 1, `running` = 0, `failed` = :failed, `failed_reasons` = :failed_reasons, `actions` = :actions, `date_execution_end` = :date_execution_end WHERE `id` = :id";
         $stmt = $db->prepare($sql);
         $stmt->execute(array('id' => $task['id'], 'failed' => $failed === true ? 1 : 0, 'failed_reasons' => json_encode($failedReasons), 'actions' => json_encode($actions), 'date_execution_end' => date("Y-m-d H:i:s")));
@@ -207,5 +213,6 @@ class CronCommand extends Command
         if ($task->getDryRun() == false) {
             cli_write(sprintf("Task with ID %s and type '%s': %s", $task['id'], $task['type'], $failed === false ? "SUCCESSFUL" : "FAILED"));
         }
+        */
     }
 }
