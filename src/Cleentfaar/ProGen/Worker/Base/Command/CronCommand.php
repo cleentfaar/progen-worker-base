@@ -23,6 +23,12 @@ class CronCommand extends Command
      * @var array
      */
     private $config;
+    
+    /**
+     * 
+     * @var \Silex\Application
+     */
+    private $app;
 
     protected function configure()
     {
@@ -39,8 +45,9 @@ class CronCommand extends Command
             /**
              * Fetch available tasks for this worker
              */
-            $this->config = $this->getSilexApplication()['progen'];
-            $this->em = $this->getSilexApplication()['orm.em'];
+        	$this->app = $this->getSilexApplication();
+            $this->config = $this->app['progen'];
+            $this->em = $this->app['orm.em'];
             if (empty($this->config['task_types'])) {
                 throw new Exception("No tasktypes configured for this worker");
             }
@@ -200,19 +207,16 @@ class CronCommand extends Command
         /**
          * Indicate to other workers that we have finished the running task
          */
-        /**
-		 * To be replaced with proper orm!
-		 * $task->set...
-		 * $em->flush();
-         */
-        /**
-        $sql = "UPDATE `tasks` SET `executed` = 1, `running` = 0, `failed` = :failed, `failed_reasons` = :failed_reasons, `actions` = :actions, `date_execution_end` = :date_execution_end WHERE `id` = :id";
-        $stmt = $db->prepare($sql);
-        $stmt->execute(array('id' => $task['id'], 'failed' => $failed === true ? 1 : 0, 'failed_reasons' => json_encode($failedReasons), 'actions' => json_encode($actions), 'date_execution_end' => date("Y-m-d H:i:s")));
-
+        $task->setExecuted(true);
+        $task->setRunning(false);
+        $task->setFailed($failed);
+        $task->setFailedReasons($failedReasons);
+        $task->setActions($actions);
+        $task->setDateExecutionEnd(new \DateTime());
+        $this->em->flush();
+        
         if ($task->getDryRun() == false) {
-            cli_write(sprintf("Task with ID %s and type '%s': %s", $task['id'], $task['type'], $failed === false ? "SUCCESSFUL" : "FAILED"));
+            $output->writeln(sprintf("Task with ID %s and type '%s': %s", $task['id'], $task['type'], $failed === false ? "SUCCESSFUL" : "FAILED"));
         }
-        */
     }
 }
